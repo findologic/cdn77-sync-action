@@ -15,15 +15,6 @@ inputs:
   cdn77_user:
     description: The cdn77 username.
     required: true
-  cdn77_resource_id:
-    description: The cdn77 resource id.
-    required: true
-  cdn77_api_token:
-    description: The cdn77 api token.
-    required: true
-  cdn77_private_key:
-    description: The ssh key.
-    required: true
 runs:
   using: docker
   image: Dockerfile
