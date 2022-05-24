@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DESTINATION="$CDN77_USER@$CDN77_HOST:$DESTINATION_PATH"
+DESTINATION="$INPUT_CDN77_USER@$INPUT_CDN77_HOST:$INPUT_DESTINATION_PATH"
 
 echo $DESTINATION
-rsync --dry-run -arzO --out-format="%o %n" --delete $SOURCE_PATH $DESTINATION
+rsync --dry-run -arzO --out-format="%o %n" --delete $INPUT_SOURCE_PATH $DESTINATION
