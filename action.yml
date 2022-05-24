@@ -1,0 +1,29 @@
+---
+name: cdn77-sync-action
+description: |
+  Action for uploading files to CDN77 storage and purging them via API
+inputs:
+  source_path:
+    description: The source path.
+    required: true
+  destination_path:
+    description: The destination path.
+    required: true
+  cdn77_host:
+    description: The cdn77 host.
+    required: true
+  cdn77_user:
+    description: The cdn77 username.
+    required: true
+  cdn77_resource_id:
+    description: The cdn77 resource id.
+    required: true
+  cdn77_api_token:
+    description: The cdn77 api token.
+    required: true
+  cdn77_private_key:
+    description: The ssh key.
+    required: true
+runs:
+  using: docker
+  image: Dockerfile
