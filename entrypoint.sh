@@ -2,14 +2,12 @@
 
 DESTINATION="$INPUT_CDN77_USER@$INPUT_CDN77_HOST:$INPUT_DESTINATION_PATH"
 
-echo $DESTINATION
-
 # Start ssh agent and add key
 eval `ssh-agent`
 echo "$INPUT_CDN77_PRIVATE_KEY" | ssh-add -
 
 # sync files to CDN77
-FILES_TO_PURGE=($(rsync --dry-run -arzO --out-format="%o %n" --delete -e "ssh -o StrictHostKeyChecking=no" $INPUT_SOURCE_PATH $DESTINATION | cut -d ' ' -f 2))
+FILES_TO_PURGE=($(rsync -arzO --out-format="%o %n" --delete -e "ssh -o StrictHostKeyChecking=no" $INPUT_SOURCE_PATH $DESTINATION | cut -d ' ' -f 2))
 
 # Close ssh agent
 eval `ssh-agent -k`
