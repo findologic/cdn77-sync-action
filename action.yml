@@ -18,6 +18,10 @@ inputs:
   cdn77_private_key:
     description: The ssh key.
     required: true
+  cdn77_purge_limit:
+    description: Max amount of files which should be sent per purge request.
+    required: false
+    default: '1750'
 runs:
   using: docker
   image: Dockerfile
