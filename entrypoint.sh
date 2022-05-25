@@ -20,6 +20,7 @@ do
   # use jq to create JSON array
   JSON_FILE_ARRAY=$(printf '%s\n' "/test/${part[@]}" | jq -R . | jq -s .)
   JSON_PAYLOAD="{\"paths\":$JSON_FILE_ARRAY}"
-  echo $JSON_PAYLOAD
+
+  # Send purge request to CDN77 API
   curl "https://api.cdn77.com/v3/cdn/${INPUT_CDN77_RESOURCE_ID}/job/purge" -sS --header "Authorization: Bearer ${INPUT_CDN77_API_TOKEN}" --data "${JSON_PAYLOAD}"
 done
