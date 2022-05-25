@@ -22,6 +22,12 @@ inputs:
     description: Max amount of files which should be sent per purge request.
     required: false
     default: '1750'
+  cdn77_resource_id:
+    description: The cdn77 resource id.
+    required: true
+  cdn77_api_token:
+    description: The cdn77 api token.
+    required: true
 runs:
   using: docker
   image: Dockerfile
