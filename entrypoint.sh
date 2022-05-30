@@ -4,7 +4,8 @@
 # and purges the files afterwards via CDN77-API.
 # The purge requests are executed in chunks so that the CDN77-API limits can be respected.
 
-DESTINATION="$INPUT_CDN77_USER@$INPUT_CDN77_HOST:$INPUT_DESTINATION_PATH"
+CDN77_BASE_PATH="/www"
+DESTINATION="$INPUT_CDN77_USER@$INPUT_CDN77_HOST:$CDN77_BASE_PATH/$INPUT_DESTINATION_PATH"
 
 # start ssh agent and add key
 eval "$(ssh-agent)"
@@ -23,7 +24,7 @@ do
   chunk=( "${FILES_TO_PURGE[@]:i:INPUT_CDN77_PURGE_LIMIT}" )
 
   # use jq to create JSON array
-  JSON_FILE_ARRAY=$(printf '/%s\n' "${chunk[@]}" | jq -R . | jq -s .)
+  JSON_FILE_ARRAY=$(printf "$INPUT_DESTINATION_PATH/%s\n" "${chunk[@]}" | jq -R . | jq -s .)
   JSON_PAYLOAD="{\"paths\":$JSON_FILE_ARRAY}"
 
   # send purge request to CDN77 API
