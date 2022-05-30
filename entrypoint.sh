@@ -23,7 +23,7 @@ do
   chunk=( "${FILES_TO_PURGE[@]:i:INPUT_CDN77_PURGE_LIMIT}" )
 
   # use jq to create JSON array
-  JSON_FILE_ARRAY=$(printf '/test/%s\n' "${chunk[@]}" | jq -R . | jq -s .)
+  JSON_FILE_ARRAY=$(printf '/%s\n' "${chunk[@]}" | jq -R . | jq -s .)
   JSON_PAYLOAD="{\"paths\":$JSON_FILE_ARRAY}"
 
   # send purge request to CDN77 API
