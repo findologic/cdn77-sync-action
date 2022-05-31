@@ -4,6 +4,7 @@
 # and purges the files afterwards via CDN77-API.
 # The purge requests are executed in chunks so that the CDN77-API limits can be respected.
 
+set -e
 CDN77_BASE_PATH="/www"
 DESTINATION="$INPUT_CDN77_USER@$INPUT_CDN77_HOST:$CDN77_BASE_PATH/$INPUT_DESTINATION_PATH"
 
@@ -12,7 +13,8 @@ eval "$(ssh-agent)"
 echo "$INPUT_CDN77_PRIVATE_KEY" | ssh-add -
 
 # sync files to CDN77
-FILES_TO_PURGE=($(rsync -arzO --out-format="%o %n" --delete -e "ssh -o StrictHostKeyChecking=no" "$INPUT_SOURCE_PATH" "$DESTINATION" | cut -d ' ' -f 2))
+FILES_TO_PURGE=($(rsync -arzO --out-format="%o %n" --delete -e "ssh -o StrictHostKeyChecking=no" \
+    "$INPUT_SOURCE_PATH" "$DESTINATION" | cut -d ' ' -f 2))
 
 # close ssh agent
 eval "$(ssh-agent -k)"
@@ -28,5 +30,6 @@ do
   JSON_PAYLOAD="{\"paths\":$JSON_FILE_ARRAY}"
 
   # send purge request to CDN77 API
-  curl "https://api.cdn77.com/v3/cdn/${INPUT_CDN77_RESOURCE_ID}/job/purge" -sS --header "Authorization: Bearer ${INPUT_CDN77_API_TOKEN}" --data "${JSON_PAYLOAD}"
+  curl "https://api.cdn77.com/v3/cdn/${INPUT_CDN77_RESOURCE_ID}/job/purge" -sS \
+      --header "Authorization: Bearer ${INPUT_CDN77_API_TOKEN}" --data "${JSON_PAYLOAD}"
 done
