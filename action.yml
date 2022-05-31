@@ -9,16 +9,16 @@ inputs:
   destination_path:
     description: The destination path.
     required: true
-  cdn77_host:
-    description: The cdn77 host.
+  cdn77_storage_host:
+    description: The cdn77 storage hostname.
     required: true
-  cdn77_user:
-    description: The cdn77 username.
+  cdn77_storage_user:
+    description: The cdn77 storage username.
     required: true
-  cdn77_private_key:
-    description: The ssh key.
+  cdn77_storage_private_key:
+    description: A private key that secures communication to the remote storage.
     required: true
-  cdn77_purge_limit:
+  cdn77_api_purge_limit:
     description: Max amount of files which should be sent per purge request.
     required: false
     default: '1750'

@@ -18,17 +18,17 @@ The purge requests are executed in chunks so that the CDN77-API limits can be re
 
 * `destination_path`: Destination path on the remote CDN77 storage.
 
-* `cdn77_host`: The CDN77 hostname.
+* `cdn77_storage_host`: The CDN77 storage hostname.
 
-* `cdn77_user`: The CDN77 username
+* `cdn77_storage_user`: The CDN77 storage username.
 
-* `cdn77_private_key`: A private key that secures communication to the remote storage.
+* `cdn77_storage_private_key`: A private key that secures communication to the remote storage.
 
 * `cdn77_resource_id`: The ID of the CDN77 resource.
 
 * `cdn77_api_token`: The CDN77 API token.
 
-* `cdn77_purge_limit`: The amount of files that should be sent within a single purge request. Default: `1750`.
+* `cdn77_api_purge_limit`: The amount of files that should be sent within a single purge request. Default: `1750`.
 
 ## Example usage
 ```yaml
@@ -37,9 +37,9 @@ The purge requests are executed in chunks so that the CDN77-API limits can be re
         with:
             source_path: /MY/SOURCE/PATH/
             destination_path: /MY/DESTINATION/PATH/
-            cdn77_host: xy-host.cdn77.com
-            cdn77_user: xy-username
-            cdn77_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+            cdn77_storage_host: xy-host.cdn77.com
+            cdn77_storage_user: xy-username
+            cdn77_storage_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
             cdn77_resource_id: 1234
             cdn77_api_token: 1234_MY_TOKEN
 ```
