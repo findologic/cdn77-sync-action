@@ -1,7 +1,7 @@
 ---
 name: cdn77-sync-action
 description: |
-  Action for uploading files to CDN77 storage and purging them via API
+  Action for uploading files to CDN77 storage + Google Cloud Storage, purging them via API and triggerin
 inputs:
   source_path:
     description: The source path.
@@ -17,6 +17,9 @@ inputs:
     required: true
   cdn77_storage_private_key:
     description: A private key that secures communication to the remote storage.
+    required: true
+  gcs_bucket:
+    description: The Google Cloud Storage bucket name.
     required: true
   cdn77_api_purge_limit:
     description: Max amount of files which should be sent per purge request.
